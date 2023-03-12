@@ -2,30 +2,17 @@
 import React from "react";
 
 const PostContainer = ({ productList = [], post }) => {
-  function downloadInnerHtml(filename, elId, mimeType) {
-    var elHtml = document.getElementById(elId).innerHTML;
-    var link = document.createElement("a");
-    mimeType = mimeType || "text/plain";
-    link.setAttribute("download", filename);
-    link.setAttribute(
-      "href",
-      "data:" + mimeType + ";charset=utf-8," + encodeURIComponent(elHtml)
-    );
-    link.click();
-  }
-
-  var filename = "output.txt";
-
-  function calldownload() {
-    downloadInnerHtml(filename, "post", "text/html");
+  function copyToClipboard() {
+    let copyText = document.getElementById("post").innerHTML;
+    navigator.clipboard.writeText(copyText);
   }
 
   return (
     <>
       <div style={{ display: "flex" }}>
         <p style={{ fontSize: "20px", marginRight: "8px" }}>Post</p>
-        <button type="button" onClick={calldownload}>
-          Generate String HTML
+        <button type="button" onClick={copyToClipboard}>
+          Copy
         </button>
       </div>
       <div id="post">
