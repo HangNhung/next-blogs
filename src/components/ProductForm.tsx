@@ -1,10 +1,20 @@
 import { useFormik } from "formik";
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 
-const noop = () => {};
+interface IForm {
+  header?: string;
+  headerSmall?: string;
+  image?: string;
+  content?: string;
+  textBtn?: string;
+}
 
-const validate = (values) => {
-  const errors = {};
+interface Props {
+  setProductList: Dispatch<SetStateAction<IForm[]>>;
+}
+
+const validate = (values: any) => {
+  const errors: IForm = {};
   if (!values.image) {
     errors.image = "Required";
   }
@@ -12,7 +22,7 @@ const validate = (values) => {
   return errors;
 };
 
-const ProductForm = ({ setProductList = noop }) => {
+const ProductForm = ({ setProductList }: Props) => {
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -32,8 +42,8 @@ const ProductForm = ({ setProductList = noop }) => {
 
   return (
     <>
-      <form className="form" onSubmit={formik.handleSubmit}>
-        <p style={{ marginBottom: "8px", fontSize: "18px" }}>Add Product</p>
+      <p className="mb-2 font-bold text-lg">Add Product</p>
+      <form className="flex flex-col space-y-2" onSubmit={formik.handleSubmit}>
         <label htmlFor="header">Header</label>
         <input
           id="header"
@@ -72,7 +82,6 @@ const ProductForm = ({ setProductList = noop }) => {
           rows={6}
           id="content"
           name="content"
-          type="text"
           onChange={formik.handleChange}
           value={formik.values.content}
           placeholder="Enter content of blog"
@@ -89,7 +98,7 @@ const ProductForm = ({ setProductList = noop }) => {
         />
 
         <button
-          style={{ margin: "4px", padding: "4px", backgroundColor: "blue" }}
+          className="bg-blue-500 text-white rounded-sm py-2"
           type="submit"
         >
           Submit

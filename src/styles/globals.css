@@ -1,3 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -6,7 +10,7 @@
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 
   --primary-glow: conic-gradient(from 180deg at 50% 50%,
@@ -34,12 +38,11 @@
   --card-border-rgb: 131, 134, 135;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
-
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
     --secondary-glow: linear-gradient(to bottom right,
         rgba(1, 65, 255, 0),
@@ -61,7 +64,7 @@
     --card-rgb: 100, 100, 100;
     --card-border-rgb: 200, 200, 200;
   }
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -87,11 +90,11 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 ul {
   list-style-type: none;
@@ -107,43 +110,9 @@ a:link {
   max-width: 1280px;
 }
 
-.summary-item {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgb(122, 117, 117);
-  padding-bottom: 12px;
-  max-width: 420px;
-}
-
-.summary-item img {
-  width: 60px;
-  height: 60px;
-  border-radius: 10%;
-}
-
-.summary-item .content {
-  display: flex;
-  flex-direction: column;
-  margin: 0 16px;
-}
-
-.summary-item .content .title {
-  font-weight: 600;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.summary-item button {
-  border-radius: 5%;
-  padding: 8px 12px;
-  border: 1px solid rgb(215, 36, 36);
-  background-color: #FFF;
-  color: rgb(215, 36, 36);
-}
-
 .product {
   border: 1px solid rgb(207, 198, 198);
-  margin-bottom: "8px";
+  margin-bottom: 12px;
 }
 
 .product img {
@@ -174,38 +143,4 @@ a:link {
   color: #FFF;
   background-color: rgb(215, 36, 36);
   border: none;
-}
-
-.form {
-  border: 1px solid;
-  display: flex;
-  flex-direction: column;
-}
-
-input[type="text"],
-textarea {
-  padding: 4px;
-  margin: 4px;
-}
-
-#product {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#product td,
-#product th {
-  border: 1px solid #ddd;
-  padding: 8px;
-  word-break: break-all;
-  max-width: 200px;
-}
-
-#product th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
 }
