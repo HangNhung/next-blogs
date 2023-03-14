@@ -1,6 +1,18 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-const ProductList = ({ productList = [] }: any) => {
+interface Props {
+  productList: [];
+  setProductList: Dispatch<SetStateAction<any>>;
+}
+
+const ProductList = ({ productList = [], setProductList }: Props) => {
+  const onDelete = (tableIndex: number) => {
+    let newProductList = [...productList].filter(
+      (_, index) => index !== tableIndex
+    );
+    setProductList(newProductList);
+  };
+
   return (
     <table
       id="table"
@@ -29,7 +41,7 @@ const ProductList = ({ productList = [] }: any) => {
         </tr>
       </thead>
       <tbody>
-        {productList.map((product: any) => (
+        {productList.map((product: any, index: number) => (
           <tr key={product.header}>
             <td className="border border-slate-300">{product.header}</td>
             <td className="border border-slate-300">{product.headerSmall}</td>
@@ -38,14 +50,9 @@ const ProductList = ({ productList = [] }: any) => {
             <td className="border border-slate-300">{product.textBtn}</td>
             <td>
               <button
-                className="text-yellow-400 underline rounded-sm p-2"
-                type="button"
-              >
-                Update
-              </button>
-              <button
                 className="text-red-400 underline rounded-sm p-2"
                 type="button"
+                onClick={() => onDelete(index)}
               >
                 Delete
               </button>

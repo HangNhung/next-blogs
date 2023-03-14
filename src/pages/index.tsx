@@ -1,31 +1,13 @@
 // import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PostContainer from "../components/PostContainer";
 import ProductForm from "../components/ProductForm";
 import ProductList from "../components/ProductList";
 
-const inter = Inter({ subsets: ["latin"] });
-
-interface IProduct {
-  header: string;
-  headerSmall: string;
-  image: string;
-  content: string;
-  textBtn: string;
-}
-
 export default function Home() {
   const [post, setPost] = useState<any>({ titlePost: "", introducePost: "" });
-  const [productSample] = useState<IProduct>({
-    header: "abc abac",
-    headerSmall: "abc abac abc abac ba acbab acbac",
-    image:
-      "https://plus.unsplash.com/premium_photo-1671451161080-e6108bb3d2d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80",
-    content: "abc abac abc abac ba acbab acbac",
-    textBtn: "1234",
-  });
   const [productList, setProductList] = useState<any>([]);
 
   const handleChange = (e: any) => {
@@ -69,7 +51,10 @@ export default function Home() {
             <br />
             <hr />
             <br />
-            <ProductList productList={productList} />
+            <ProductList
+              productList={productList}
+              setProductList={setProductList}
+            />
             <br />
             <hr />
             <br />

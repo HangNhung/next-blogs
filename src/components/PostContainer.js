@@ -44,63 +44,75 @@ const PostContainer = ({ productList = [], post }) => {
             <ul>
               {productList.map((product, index) => (
                 <li key={`${product.header}-${product.index}`}>
-                  {/* <a href="/#"> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      borderBottom:
-                        index === productList.length
-                          ? "unset"
-                          : "1px solid rgb(122, 117, 117)",
-                      paddingTop: "12px",
-                      paddingBottom: "12px",
-                    }}
+                  <a
+                    style={{ cursor: "pointer" }}
+                    href={product.image}
+                    target="_blank"
                   >
-                    <img
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: "10%",
-                        flexShrink: 0,
-                      }}
-                      src={product.image}
-                      alt={product.header}
-                    />
                     <div
                       style={{
                         display: "flex",
-                        flexDirection: "column",
-                        margin: "0 16px",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        borderBottom:
+                          index === productList.length - 1
+                            ? "unset"
+                            : "1px solid rgb(122, 117, 117)",
+                        paddingTop: "12px",
+                        paddingBottom: "12px",
                       }}
                     >
-                      <span
+                      <div
                         style={{
-                          paddingTop: "12px",
-                          fontWeight: 600,
-                          fontSize: "18px",
-                          marginBottom: "8px",
+                          width: "80px",
+                          flexShrink: 0,
                         }}
                       >
-                        {product.header}
-                      </span>
-                      <span>{product.headerSmall}</span>
+                        <img
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            maxHeight: "80px",
+                            objectFit: "contain",
+                            borderRadius: "10%",
+                          }}
+                          src={product.image}
+                          alt={product.header}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          margin: "0 16px",
+                        }}
+                      >
+                        <span
+                          style={{
+                            paddingTop: "12px",
+                            fontWeight: 600,
+                            fontSize: "18px",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          {product.header}
+                        </span>
+                        <span>{product.headerSmall}</span>
+                      </div>
+                      <button
+                        style={{
+                          borderRadius: "5%",
+                          padding: "8px 12px",
+                          border: "1px solid rgb(215, 36, 36)",
+                          backgroundColor: "#FFF",
+                          color: "rgb(215, 36, 36)",
+                        }}
+                        type="button"
+                      >
+                        {product.textBtn}
+                      </button>
                     </div>
-                    <button
-                      style={{
-                        borderRadius: "5%",
-                        padding: "8px 12px",
-                        border: "1px solid rgb(215, 36, 36)",
-                        backgroundColor: "#FFF",
-                        color: "rgb(215, 36, 36)",
-                      }}
-                      type="button"
-                    >
-                      {product.textBtn}
-                    </button>
-                  </div>
-                  {/* </a> */}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -122,7 +134,18 @@ const PostContainer = ({ productList = [], post }) => {
                 key={`${product.header}-${product.index}`}
                 className="product"
               >
-                <img src={product.image} alt={product.header} />
+                <div>
+                  <img
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      maxHeight: "360px",
+                      objectFit: "cover",
+                    }}
+                    src={product.image}
+                    alt={product.header}
+                  />
+                </div>
                 <div className="content">
                   <p
                     style={{

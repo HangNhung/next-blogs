@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 interface IForm {
   header?: string;
   headerSmall?: string;
+  link?: string;
   image?: string;
   content?: string;
   textBtn?: string;
@@ -15,8 +16,24 @@ interface Props {
 
 const validate = (values: any) => {
   const errors: IForm = {};
+  if (!values.header) {
+    errors.header = "Required";
+  }
+
+  if (!values.link) {
+    errors.link = "Required";
+  }
+
   if (!values.image) {
     errors.image = "Required";
+  }
+
+  if (!values.content) {
+    errors.content = "Required";
+  }
+
+  if (!values.textBtn) {
+    errors.textBtn = "Required";
   }
 
   return errors;
@@ -29,6 +46,7 @@ const ProductForm = ({ setProductList }: Props) => {
       introduce: "",
       header: "",
       headerSmall: "",
+      link: "",
       image: "",
       content: "",
       textBtn: "",
@@ -36,7 +54,7 @@ const ProductForm = ({ setProductList }: Props) => {
     validate,
     onSubmit: (values) => {
       setProductList((prev) => [...prev, values]);
-      // alert(JSON.stringify(values, null, 2));
+      formik.resetForm();
     },
   });
 
@@ -54,6 +72,10 @@ const ProductForm = ({ setProductList }: Props) => {
           placeholder="Enter header of blog"
         />
 
+        {formik.errors.header ? (
+          <div style={{ color: "red" }}>{formik.errors.header}</div>
+        ) : null}
+
         <label htmlFor="headerSmall">Header Small</label>
         <input
           id="headerSmall"
@@ -64,15 +86,30 @@ const ProductForm = ({ setProductList }: Props) => {
           placeholder="Enter header small of blog"
         />
 
+        <label htmlFor="link">Link*</label>
+        <input
+          id="link"
+          name="link"
+          type="url"
+          onChange={formik.handleChange}
+          value={formik.values.link}
+          placeholder="Enter link Aff"
+        />
+
+        {formik.errors.link ? (
+          <div style={{ color: "red" }}>{formik.errors.link}</div>
+        ) : null}
+
         <label htmlFor="image">Image*</label>
         <input
           id="image"
           name="image"
-          type="text"
+          type="url"
           onChange={formik.handleChange}
           value={formik.values.image}
           placeholder="Enter link image"
         />
+
         {formik.errors.image ? (
           <div style={{ color: "red" }}>{formik.errors.image}</div>
         ) : null}
@@ -87,6 +124,10 @@ const ProductForm = ({ setProductList }: Props) => {
           placeholder="Enter content of blog"
         />
 
+        {formik.errors.content ? (
+          <div style={{ color: "red" }}>{formik.errors.content}</div>
+        ) : null}
+
         <label htmlFor="textBtn">Text of Button</label>
         <input
           id="textBtn"
@@ -96,6 +137,10 @@ const ProductForm = ({ setProductList }: Props) => {
           value={formik.values.textBtn}
           placeholder="Enter text of button"
         />
+
+        {formik.errors.textBtn ? (
+          <div style={{ color: "red" }}>{formik.errors.textBtn}</div>
+        ) : null}
 
         <button
           className="bg-blue-500 text-white rounded-sm py-2"
