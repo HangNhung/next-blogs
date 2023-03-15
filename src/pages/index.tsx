@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     if (productList.length) {
-      localStorage.setItem("productList", productList);
+      localStorage.setItem("productList", JSON.stringify(productList));
     }
   }, [productList]);
 
