@@ -22,6 +22,7 @@ const PostContainer = ({ productList = [], post }) => {
       <div id="post">
         <div className="container">
           <div
+            id="table-of-content"
             style={{
               marginBottom: "12px",
               maxWidth: "500px",
@@ -46,7 +47,7 @@ const PostContainer = ({ productList = [], post }) => {
                 <li key={`${product.header}-${product.index}`}>
                   <a
                     style={{ cursor: "pointer" }}
-                    href={product.image}
+                    href={product.link}
                     target="_blank"
                   >
                     <div
@@ -130,40 +131,44 @@ const PostContainer = ({ productList = [], post }) => {
           </h3>
           <div>
             {productList.map((product, index) => (
-              <div
+              <a
                 key={`${product.header}-${product.index}`}
-                className="product"
+                style={{ cursor: "pointer" }}
+                href={product.link}
+                target="_blank"
               >
-                <div>
-                  <img
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      maxHeight: "360px",
-                      objectFit: "cover",
-                    }}
-                    src={product.image}
-                    alt={product.header}
-                  />
+                <div className="product">
+                  <div>
+                    <img
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        maxHeight: "360px",
+                        objectFit: "contain",
+                      }}
+                      src={product.image}
+                      alt={product.header}
+                    />
+                  </div>
+                  <div className="content">
+                    <p
+                      style={{
+                        paddingTop: "12px",
+                      }}
+                      className="title"
+                    >
+                      {product.header}
+                    </p>
+                    <p className="title-2">{product.headerSmall}</p>
+                    <p style={{ paddingTop: "12px", paddingBottom: "8px" }}>
+                      {product.content}
+                    </p>
+                    <button type="button" style={{ fontWeight: 500 }}>
+                      {product.textBtn}
+                    </button>
+                  </div>
                 </div>
-                <div className="content">
-                  <p
-                    style={{
-                      paddingTop: "12px",
-                    }}
-                    className="title"
-                  >
-                    {product.header}
-                  </p>
-                  <p className="title-2">{product.headerSmall}</p>
-                  <p style={{ paddingTop: "12px", paddingBottom: "8px" }}>
-                    {product.content}
-                  </p>
-                  <button type="button" style={{ fontWeight: 500 }}>
-                    {product.textBtn}
-                  </button>
-                </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

@@ -10,6 +10,12 @@ export default function Home() {
   const [post, setPost] = useState<any>({ titlePost: "", introducePost: "" });
   const [productList, setProductList] = useState<any>([]);
 
+  useEffect(() => {
+    if (productList.length) {
+      localStorage.setItem("productList", productList);
+    }
+  }, [productList]);
+
   const handleChange = (e: any) => {
     setPost((prev: any) => ({ ...prev, [e.target.name]: e.target.value }));
   };
