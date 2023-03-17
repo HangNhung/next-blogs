@@ -3,9 +3,18 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface Props {
   productList: [];
   setProductList: Dispatch<SetStateAction<any>>;
+  setSelectedProduct: Dispatch<SetStateAction<any>>;
 }
 
-const ProductList = ({ productList = [], setProductList }: Props) => {
+const ProductList = ({
+  productList = [],
+  setProductList,
+  setSelectedProduct,
+}: Props) => {
+  const onUpdate = (values: Object) => {
+    setSelectedProduct(values);
+  };
+
   const onDelete = (tableIndex: number) => {
     let newProductList = [...productList].filter(
       (_, index) => index !== tableIndex
@@ -20,9 +29,6 @@ const ProductList = ({ productList = [], setProductList }: Props) => {
     >
       <thead>
         <tr>
-          <th className="bg-blue-500 text-white py-2 border border-slate-300">
-            Header Small
-          </th>
           <th className="bg-blue-500 text-white py-2 border border-slate-300">
             Header
           </th>
@@ -42,13 +48,19 @@ const ProductList = ({ productList = [], setProductList }: Props) => {
       </thead>
       <tbody>
         {productList.map((product: any, index: number) => (
-          <tr key={product.header}>
+          <tr key={`${product.header}-${product.index}`}>
             <td className="border border-slate-300">{product.header}</td>
-            <td className="border border-slate-300">{product.headerSmall}</td>
             <td className="border border-slate-300">{product.image}</td>
             <td className="border border-slate-300">{product.content}</td>
             <td className="border border-slate-300">{product.textBtn}</td>
             <td>
+              <button
+                className="text-yellow-400 underline rounded-sm p-2"
+                type="button"
+                onClick={() => onUpdate(product)}
+              >
+                Update
+              </button>
               <button
                 className="text-red-400 underline rounded-sm p-2"
                 type="button"

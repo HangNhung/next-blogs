@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 
-const PostContainer = ({ productList = [], post }) => {
+const PostContainer = ({ productList = [] }) => {
   function copyToClipboard() {
     let copyText = document.getElementById("post").innerHTML;
     navigator.clipboard.writeText(copyText);
@@ -83,22 +83,14 @@ const PostContainer = ({ productList = [], post }) => {
                       </div>
                       <div
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          margin: "0 16px",
+                          paddingTop: "12px",
+                          fontWeight: 600,
+                          fontSize: "18px",
+                          marginBottom: "8px",
+                          textAlign: "center",
                         }}
                       >
-                        <span
-                          style={{
-                            paddingTop: "12px",
-                            fontWeight: 600,
-                            fontSize: "18px",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          {product.header}
-                        </span>
-                        <span>{product.headerSmall}</span>
+                        {product.header}
                       </div>
                       <button
                         style={{
@@ -107,6 +99,8 @@ const PostContainer = ({ productList = [], post }) => {
                           border: "1px solid rgb(215, 36, 36)",
                           backgroundColor: "#FFF",
                           color: "rgb(215, 36, 36)",
+                          width: 120,
+                          wordWrap: "break-word",
                         }}
                         type="button"
                       >
@@ -118,17 +112,6 @@ const PostContainer = ({ productList = [], post }) => {
               ))}
             </ul>
           </div>
-          <p style={{ marginBottom: "12px" }}>{post.introducePost}</p>
-
-          <h3
-            style={{
-              marginBottom: "12px",
-              fontSize: "18px",
-              fontWeight: 600,
-            }}
-          >
-            {post.titlePost}
-          </h3>
           <div>
             {productList.map((product, index) => (
               <a
@@ -145,6 +128,7 @@ const PostContainer = ({ productList = [], post }) => {
                         height: "auto",
                         maxHeight: "360px",
                         objectFit: "contain",
+                        padding: "20px",
                       }}
                       src={product.image}
                       alt={product.header}
@@ -159,7 +143,6 @@ const PostContainer = ({ productList = [], post }) => {
                     >
                       {product.header}
                     </p>
-                    <p className="title-2">{product.headerSmall}</p>
                     <p style={{ paddingTop: "12px", paddingBottom: "8px" }}>
                       {product.content}
                     </p>

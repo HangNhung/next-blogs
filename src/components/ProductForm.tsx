@@ -1,21 +1,27 @@
-import { useFormik } from "formik";
-import { Dispatch, SetStateAction } from "react";
+import { FormikValues, useFormik } from "formik";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 interface IForm {
-  header?: string;
-  headerSmall?: string;
-  link?: string;
-  image?: string;
-  content?: string;
-  textBtn?: string;
+  header: string;
+  link: string;
+  image: string;
+  content: string;
+  textBtn: string;
 }
 
 interface Props {
   setProductList: Dispatch<SetStateAction<IForm[]>>;
+  selectedProduct: IForm;
 }
 
 const validate = (values: any) => {
-  const errors: IForm = {};
+  const errors: IForm = {
+    header: "",
+    link: "",
+    image: "",
+    content: "",
+    textBtn: "",
+  };
   if (!values.header) {
     errors.header = "Required";
   }
@@ -39,24 +45,27 @@ const validate = (values: any) => {
   return errors;
 };
 
-const ProductForm = ({ setProductList }: Props) => {
+const ProductForm = ({ setProductList, selectedProduct }: Props) => {
   const formik = useFormik({
     initialValues: {
-      title: "",
-      introduce: "",
       header: "",
-      headerSmall: "",
       link: "",
       image: "",
       content: "",
       textBtn: "",
     },
-    validate,
+    // validate,
     onSubmit: (values) => {
       setProductList((prev) => [...prev, values]);
       formik.resetForm();
     },
   });
+
+  useEffect(() => {
+    if (selectedProduct) {
+      formik.resetForm({ values: selectedProduct });
+    }
+  }, [selectedProduct]); //eslint-disable-line
 
   return (
     <>
@@ -76,15 +85,19 @@ const ProductForm = ({ setProductList }: Props) => {
           <div style={{ color: "red" }}>{formik.errors.header}</div>
         ) : null}
 
-        <label htmlFor="headerSmall">Header Small</label>
-        <input
-          id="headerSmall"
-          name="headerSmall"
-          type="text"
+        <label htmlFor="content">Content</label>
+        <textarea
+          rows={6}
+          id="content"
+          name="content"
           onChange={formik.handleChange}
-          value={formik.values.headerSmall}
-          placeholder="Enter header small of blog"
+          value={formik.values.content}
+          placeholder="Enter content of blog"
         />
+
+        {formik.errors.content ? (
+          <div style={{ color: "red" }}>{formik.errors.content}</div>
+        ) : null}
 
         <label htmlFor="link">Link*</label>
         <input
@@ -112,20 +125,6 @@ const ProductForm = ({ setProductList }: Props) => {
 
         {formik.errors.image ? (
           <div style={{ color: "red" }}>{formik.errors.image}</div>
-        ) : null}
-
-        <label htmlFor="content">Content</label>
-        <textarea
-          rows={6}
-          id="content"
-          name="content"
-          onChange={formik.handleChange}
-          value={formik.values.content}
-          placeholder="Enter content of blog"
-        />
-
-        {formik.errors.content ? (
-          <div style={{ color: "red" }}>{formik.errors.content}</div>
         ) : null}
 
         <label htmlFor="textBtn">Text of Button</label>
